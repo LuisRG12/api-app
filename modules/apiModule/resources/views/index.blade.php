@@ -18,19 +18,10 @@
             </div>
         </form>
         
-        <ul class="list-group mt-4">
-            @foreach ($pokemons as $pokemon)
-                <li class="list-group-item">
-                    <a href="{{route('pokemon.show',$pokemon['name'])}}">
-                        {{ $pokemon['name'] }}
-                    </a>
-                </li>
-            @endforeach
-        </ul>
-
-        <!-- Mostrar enlaces de paginación -->
-        <div class="d-flex justify-content-center mt-4">
-            {{ $pokemons->links() }}
+        <div class="container">
+            <h1>Pokémon List</h1>
+            {!! $pokemonList !!}
+            {!! $paginationLinks !!}
         </div>
     </div>
 

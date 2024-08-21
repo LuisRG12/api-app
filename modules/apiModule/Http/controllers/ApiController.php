@@ -36,7 +36,16 @@ class ApiController extends Controller
                 ['path' => request()->url(), 'query' => request()->query()] // Información de la URL
             );
 
-            return view('apiModule::index', ['pokemons' => $paginatedPokemons]);
+            $pokemonList = '<ul class="list-group mt-4">';
+            foreach ($paginatedPokemons as $pokemon) {
+                $pokemonList .= '<li class="list-group-item"><a href="'.route('pokemon.show', $pokemon['name']).'">'.$pokemon['name'].'</a></li>';
+            }
+            $pokemonList .= '</ul>';
+
+            // Enlaces de paginación
+            $paginationLinks = '<div class="d-flex justify-content-center mt-4">'.$paginatedPokemons->links().'</div>';
+
+             return view('apiModule::index', ['pokemonList' => $pokemonList, 'paginationLinks' => $paginationLinks]);
         } else 
         {
             return response()->json(['error' => 'Failed to fetch Pokémon data'], 404);
